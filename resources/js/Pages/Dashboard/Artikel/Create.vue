@@ -44,9 +44,12 @@ const submit = () => {
               <input 
                 v-model="form.title"
                 type="text"
-                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200 
-                       focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-                       transition-colors"
+                class="w-full 
+                bg-[#1a1b1e] border 
+                border-[#3d3f45] rounded-lg px-4 py-3 
+                text-gray-200 
+                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
+                transition-colors"
                 placeholder="Masukkan judul artikel"
               >
             </div>
@@ -59,9 +62,12 @@ const submit = () => {
               <input 
                 v-model="form.slug"
                 type="text"
-                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200
-                       focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-                       transition-colors"
+                class="w-full 
+                bg-[#1a1b1e] border 
+                border-[#3d3f45] rounded-lg px-4 py-3
+                text-gray-200
+                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
+                transition-colors"
                 placeholder="artikel-slug"
               >
             </div>
@@ -133,7 +139,7 @@ const submit = () => {
 <style>
 /* Custom styling for date input in dark mode */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+  filter: invert(1) sepia(100%) saturate(500%) hue-rotate(-40deg);
   opacity: 0.5;
   cursor: pointer;
 }

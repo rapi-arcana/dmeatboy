@@ -46,10 +46,10 @@ class ArtikelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|min:10|max:60',
             'excerpt' => 'required|string',
             'image' => 'required|url',
-            'date' => 'required|date',
+            'date' => 'required|date|after_or_equal:-5 days|before_or_equal:today',
         ]);
 
         $slug = Str::slug($request->title);
@@ -93,10 +93,10 @@ class ArtikelController extends Controller
         $artikel = Artikel::where('slug', $slug)->firstOrFail();
 
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|min:10|max:60',
             'excerpt' => 'required|string',
             'image' => 'required|url',
-            'date' => 'required|date',
+            'date' => 'required|date|after_or_equal:-5 days|before_or_equal:today',
         ]);
 
         if ($request->title !== $artikel->title) {
