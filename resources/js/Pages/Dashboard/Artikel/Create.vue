@@ -1,26 +1,29 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3'
-import { watch } from 'vue'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import { useForm } from "@inertiajs/vue3";
+import { watch } from "vue";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 const form = useForm({
-  title: '',
-  slug: '',
-  excerpt: '',
-  image: '',
-  date: ''
-})
+  title: "",
+  slug: "",
+  excerpt: "",
+  image: "",
+  date: "",
+});
 
-watch(() => form.title, (newTitle) => {
-  form.slug = newTitle
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)+/g, '')
-})
+watch(
+  () => form.title,
+  (newTitle) => {
+    form.slug = newTitle
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  }
+);
 
 const submit = () => {
-  form.post(route('dashboard.artikel.store'))
-}
+  form.post(route("dashboard.artikel.store"));
+};
 </script>
 
 <template>
@@ -29,8 +32,12 @@ const submit = () => {
       <div class="max-w-3xl mx-auto">
         <!-- Header -->
         <div class="mb-8">
-          <h1 class="text-2xl font-bold text-secondary">Tambah Artikel Baru</h1>
-          <p class="text-gray-400 mt-2">Isi formulir di bawah untuk membuat artikel baru</p>
+          <h1 class="text-2xl font-bold text-secondary">
+            Tambah Artikel Baru
+          </h1>
+          <p class="text-gray-400 mt-2">
+            Isi formulir di bawah untuk membuat artikel baru
+          </p>
         </div>
 
         <!-- Form Card -->
@@ -41,17 +48,12 @@ const submit = () => {
               <label class="block text-secondary text-sm font-medium mb-2">
                 Judul
               </label>
-              <input 
-                v-model="form.title"
-                type="text"
-                class="w-full 
-                bg-[#1a1b1e] border 
-                border-[#3d3f45] rounded-lg px-4 py-3 
-                text-gray-200 
-                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-                transition-colors"
-                placeholder="Masukkan judul artikel"
-              >
+              <input v-model="form.title" type="text"
+                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                placeholder="Masukkan judul artikel" />
+              <p v-if="form.errors.title" class="text-red-500 text-sm mt-1">
+                {{ form.errors.title }}
+              </p>
             </div>
 
             <!-- Slug Input -->
@@ -59,17 +61,9 @@ const submit = () => {
               <label class="block text-secondary text-sm font-medium mb-2">
                 Slug
               </label>
-              <input 
-                v-model="form.slug"
-                type="text"
-                class="w-full 
-                bg-[#1a1b1e] border 
-                border-[#3d3f45] rounded-lg px-4 py-3
-                text-gray-200
-                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-                transition-colors"
-                placeholder="artikel-slug"
-              >
+              <input v-model="form.slug" type="text"
+                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                placeholder="artikel-slug" />
             </div>
 
             <!-- Excerpt Textarea -->
@@ -77,14 +71,12 @@ const submit = () => {
               <label class="block text-secondary text-sm font-medium mb-2">
                 Excerpt
               </label>
-              <textarea 
-                v-model="form.excerpt"
-                rows="4"
-                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200
-                       focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-                       transition-colors resize-none"
-                placeholder="Tuliskan ringkasan artikel"
-              ></textarea>
+              <textarea v-model="form.excerpt" rows="4"
+                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-none"
+                placeholder="Tuliskan ringkasan artikel"></textarea>
+              <p v-if="form.errors.excerpt" class="text-red-500 text-sm mt-1">
+                {{ form.errors.excerpt }}
+              </p>
             </div>
 
             <!-- Image URL Input -->
@@ -92,14 +84,12 @@ const submit = () => {
               <label class="block text-secondary text-sm font-medium mb-2">
                 URL Gambar
               </label>
-              <input 
-                v-model="form.image"
-                type="text"
-                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200
-                       focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-                       transition-colors"
-                placeholder="https://example.com/image.jpg"
-              >
+              <input v-model="form.image" type="text"
+                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                placeholder="https://example.com/image.jpg" />
+              <p v-if="form.errors.image" class="text-red-500 text-sm mt-1">
+                {{ form.errors.image }}
+              </p>
             </div>
 
             <!-- Date Input with fixed styling -->
@@ -107,23 +97,19 @@ const submit = () => {
               <label class="block text-secondary text-sm font-medium mb-2">
                 Tanggal
               </label>
-              <input 
-                v-model="form.date"
-                type="date"
-                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200
-                       focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-                       transition-colors [color-scheme:dark]"
-              >
+              <input v-model="form.date" type="date"
+                class="w-full bg-[#1a1b1e] border border-[#3d3f45] rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors [color-scheme:dark]" />
+              <p v-if="form.errors.date" class="text-red-500 text-sm mt-1">
+                {{ form.errors.date }}
+              </p>
             </div>
 
             <!-- Submit Button -->
             <div class="flex justify-end pt-4">
-              <button 
-                type="submit"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg
-                       transition-colors duration-200 flex items-center gap-2"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 Simpan Artikel
